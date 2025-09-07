@@ -53,8 +53,11 @@ a given platform.
 this and has a lot of features beyond this little tool, but is far more complex and does
 not build on uv.
 
-[shiv](https://github.com/linkedin/shiv) and [pex](https://github.com/pex-tool/pex) are
-mature options that focus on zipping up your app, but not the Python installation.
+[shiv](https://github.com/linkedin/shiv) is a mature option that focuses on zipping up
+your app, but not the Python installation.
+
+[Pex](https://github.com/pex-tool/pex) is a mature option that produces zipapps by
+default, but can produce a standalone binary instead when passed `--scie ...`.
 
 [PyApp](https://github.com/ofek/pyapp) is a more recent effort on top of uv that creates
 a Rust-built standalone binary that downloads/installs Python and dependencies at
