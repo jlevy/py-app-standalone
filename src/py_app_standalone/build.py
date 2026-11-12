@@ -40,6 +40,7 @@ def build_python_env(
             "install",
             # These are the uv-managed standalone Python binaries.
             "--managed-python",
+            "--no-bin",
             "--install-dir",
             str(target_absolute),
             python_version,
@@ -47,7 +48,13 @@ def build_python_env(
     )
 
     # Find the root directory of the environment.
-    install_root_pat = os.path.join(target_dir, f"cpython-{python_version}.*")
+    try:
+        # Assume python_version is a number
+        float(python_version)
+        install_root_pat = os.path.join(target_dir, f"cpython-{python_version}.*")
+    except ValueError:
+        # Then it must be a uv python version specifier.
+        install_root_pat = os.path.join(target_dir, f"{python_version}.*")
     install_root_paths = glob.glob(install_root_pat)
     if not install_root_paths:
         raise FileNotFoundError(f"Failed to find venv root at: {install_root_pat}")
@@ -89,6 +96,7 @@ def build_python_env(
             "--python",
             str(install_root),
             "--break-system-packages",
+            "--link-mode=copy",
         ]
     )
 
