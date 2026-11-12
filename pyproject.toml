@@ -80,7 +80,7 @@ source = "uv-dynamic-versioning"
 [tool.uv-dynamic-versioning]
 vcs = "git"
 style = "pep440"
-bump = "true"
+bump = true
 
 [tool.hatch.build.targets.wheel]
 # The source location for the package.
